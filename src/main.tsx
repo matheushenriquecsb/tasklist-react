@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Index from "./pages/Index.tsx";
-import "./app.css";
+import Task from "./pages/Task.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Index />
+    <Task />
   </React.StrictMode>
 );
