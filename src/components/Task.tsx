@@ -1,21 +1,34 @@
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import "./task.css";
+import { TaskInterfaceProps } from "../interfaces/task.interface";
 
-const Task = () => {
+const Todos = ({
+  tasks,
+  modifyStatusTask,
+  handleWithEditButtonClick,
+  deleteTodo,
+}) => {
   return (
     <div className="todos">
-      <div className="todo">
-        <button className="checkbox"></button>
-        <p>Task</p>
-        <button>
-          <AiOutlineEdit size={22} color={"#64697b"}></AiOutlineEdit>
-        </button>
-        <button>
-          <AiOutlineDelete size={24} color={"#64697b"}></AiOutlineDelete>
-        </button>
-      </div>
+      {tasks.map((task) => {
+        return (
+          <div className="todo">
+            <button
+              onClick={() => modifyStatusTask(task)}
+              className="checkbox"
+              style={{ backgroundColor: task.status ? "#A879E6" : "white" }}
+            ></button>
+            <p>{task.name}</p>
+            <button onClick={() => handleWithEditButtonClick(task)}>
+              <AiOutlineEdit size={23} color={"#64697b"}></AiOutlineEdit>
+            </button>
+            <button onClick={() => deleteTodo(task)}>
+              <AiOutlineDelete size={23} color={"#64697b"}></AiOutlineDelete>
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 };
-
-export default Task;
+export default Todos;
