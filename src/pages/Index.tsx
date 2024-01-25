@@ -7,16 +7,16 @@ import { TaskInterfaceProps } from "../interfaces/task.interface";
 const Index = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [inputVisbility, setInputVisility] = useState(false);
+  const [inputVisibility, setInputVisibility] = useState(false);
   const [selectedTask, setSelectedTodo] = useState();
 
   async function handleWithNewButton() {
-    setInputVisility(!inputVisbility);
+    setInputVisibility(!inputVisibility);
   }
 
-  async function handleWithEditButtonClick(todo) {
+  async function handleWithEditButtonClick(todo: TaskInterfaceProps) {
     setSelectedTodo(todo);
-    setInputVisility(true);
+    setInputVisibility(true);
   }
 
   async function getTasks() {
@@ -24,10 +24,10 @@ const Index = () => {
     setTasks(response);
   }
 
-  async function editTodo() {
+  async function editTask() {
     console.log(inputValue);
     await api.editData(selectedTask.id, inputValue);
-    setInputVisility(false);
+    setInputVisibility(false);
     setSelectedTodo();
     getTasks();
     setInputValue("");
@@ -46,7 +46,7 @@ const Index = () => {
   async function createTask() {
     await api.createData(inputValue);
     getTasks();
-    setInputVisility(!inputVisbility);
+    setInputVisibility(!inputVisibility);
     setInputValue("");
   }
 
@@ -58,17 +58,17 @@ const Index = () => {
     <div className="App">
       <header className="container">
         <div className="headerTitle">
-          <h1>Task List</h1>
+          <h1>Tasks List</h1>
         </div>
         <Todos
           tasks={tasks}
           modifyStatusTask={modifyStatusTask}
           handleWithEditButtonClick={handleWithEditButtonClick}
-          deleteTodo={deleteTask}
+          deleteTask={deleteTask}
         ></Todos>
         <input
           value={inputValue}
-          style={{ display: inputVisbility ? "block" : "none" }}
+          style={{ display: inputVisibility ? "block" : "none" }}
           onChange={(event) => {
             setInputValue(event.target.value);
           }}
@@ -76,15 +76,15 @@ const Index = () => {
         ></input>
         <button
           onClick={
-            inputVisbility
+            inputVisibility
               ? selectedTask
-                ? editTodo
+                ? editTask
                 : createTask
               : handleWithNewButton
           }
           className="newTaskButton"
         >
-          {inputVisbility ? "Confirm" : "+ New task"}
+          {inputVisibility ? "Confirm" : "+ New task"}
         </button>
       </header>
     </div>

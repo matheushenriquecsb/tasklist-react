@@ -1,12 +1,12 @@
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import "./task.css";
-import { TaskInterfaceProps } from "../interfaces/task.interface";
+import { TaskProps } from "../interfaces/task.interface";
 
-const Todos = ({
+const Todos: React.FC<TaskProps> = ({
   tasks,
   modifyStatusTask,
   handleWithEditButtonClick,
-  deleteTodo,
+  deleteTask,
 }) => {
   return (
     <div className="todos">
@@ -22,7 +22,7 @@ const Todos = ({
             <button onClick={() => handleWithEditButtonClick(task)}>
               <AiOutlineEdit size={23} color={"#64697b"}></AiOutlineEdit>
             </button>
-            <button onClick={() => deleteTodo(task)}>
+            <button onClick={() => deleteTask(task)}>
               <AiOutlineDelete size={23} color={"#64697b"}></AiOutlineDelete>
             </button>
           </div>
